@@ -1,0 +1,22 @@
+version: "3.7"
+
+client:
+  build:
+    dockerfile: client.dockerfile
+    context: .
+  image: ijunior/client-base:v1
+  container_name: client-base
+  ports:
+    - "2003:81"
+  networks:
+    - base_network
+  depends_on:
+    - api
+  command: nginx -g 'daemon off;'
+
+networks:
+  base_network:
+    driver: bridge
+
+volumes:
+  cache:
